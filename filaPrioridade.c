@@ -30,22 +30,19 @@ void enqueuePrio(struct prioQueue *q, char *nome, int type)
         case 2:
             enqueue(q->qComum, nome);
             break;
+        default:
+            printf("\nTipo de cliente inválido\n");
     }
 }
 
 char *dequeuePrio(struct prioQueue *q)
 {
-    //char *nome = malloc(sizeof(char) * 50);
     if(!filaVazia(q->qIdoso))
-        //strcpy(nome, dequeue(q->qIdoso));
         return (dequeue(q->qIdoso));
     else if(filaVazia(q->qIdoso) && !filaVazia(q->qEspecial))
-        //strcpy(nome, dequeue(q->qEspecial));
         return (dequeue(q->qEspecial));
     else
-        //strcpy(nome, dequeue(q->qComum));
         return (dequeue(q->qComum));
-   // return nome;
 }
 
 void printQueuePrio(struct prioQueue *q)

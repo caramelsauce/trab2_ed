@@ -31,7 +31,10 @@ char *dequeue(struct queue *q)
 {
     struct elemento *aux = NULL;
     char *nome = malloc(sizeof(char)  * 50);
-    if(!filaVazia(q)){
+    if(filaVazia(q)){
+        return NULL;
+    }
+    else{
         aux = q->inicio;
         strcpy(nome, q->inicio->nome);
         q->inicio = q->inicio->next;
