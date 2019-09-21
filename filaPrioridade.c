@@ -37,10 +37,14 @@ void enqueuePrio(struct prioQueue *q, char *nome, int type)
 
 char *dequeuePrio(struct prioQueue *q)
 {
-    if(!filaVazia(q->qIdoso))
+    if(!filaVazia(q->qIdoso)){
+        aging(q, 0);
         return (dequeue(q->qIdoso));
-    else if(filaVazia(q->qIdoso) && !filaVazia(q->qEspecial))
+    }
+    else if(filaVazia(q->qIdoso) && !filaVazia(q->qEspecial)){
+        aging(q, 1);
         return (dequeue(q->qEspecial));
+    }
     else
         return (dequeue(q->qComum));
 }
@@ -53,4 +57,26 @@ void printQueuePrio(struct prioQueue *q)
     printQueue(q->qEspecial);
     printf("\nFila Comum:\n");
     printQueue(q->qComum);
+}
+
+void aging(struct prioQueue *q, int op)
+{
+    static int contIdoso = 0, contEspecial = 0;
+    char *nome;
+    if(op == 0 && !filaVazia(q->qEspecial))
+        contIdoso++;
+    else if(op == 1 && !filaVazia(q->qComum))
+        contEspecial++;
+    if(contIdoso == 5){
+        nome = dequeue(q->qEspecial);
+        if(nome != NULL)
+            enqueue(q->qIdoso, nome);
+        contIdoso = 0;
+    }
+    if(contEspecial == 5){
+        nome = dequeue(q->qComum);
+        if(nome != NULL)
+            enqueue(q->qEspecial, nome);
+        contEspecial = 0;
+    }
 }

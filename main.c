@@ -21,8 +21,9 @@ int main()
         switch(op){
             case 1:
                 printf("\nDigite o nome do cliente: ");
-                //gets(nome);
-                scanf("%s", &nome);
+                getchar();
+                gets(nome);
+                //scanf("%s", &nome);
                 printf("\nDigite o tipo de cliente: ");
                 scanf("%d", &t);
                 enqueuePrio(&q, nome, t);                   
@@ -56,5 +57,5 @@ void menu()
     printf("\n2 - Chamar Cliente\n");
     printf("\n3 - Imprimir Fila\n");
     printf("\n0 - Sair\n");
-    printf("Opção: ");
+    printf("\nOpção: ");
 }

@@ -19,4 +19,6 @@ char *dequeuePrio(struct prioQueue *q);
 
 void printQueuePrio(struct prioQueue *q);
 
+void aging(struct prioQueue *q, int op);
+
 #endif
