@@ -71,6 +71,9 @@ void aging(struct prioQueue *q, int op)
         nome = dequeue(q->qEspecial);
         if(nome != NULL)
             enqueue(q->qIdoso, nome);
+        nome = dequeue(q->qComum);
+        if(nome != NULL)
+            enqueue(q->qEspecial, nome);
         contIdoso = 0;
     }
     if(contEspecial == 5){
