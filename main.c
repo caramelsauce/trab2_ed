@@ -35,7 +35,7 @@ int main()
                 printf("\nDigite o nome do cliente: ");
                 getchar();  //retirar o '\n' do buffer
                 gets(nome);
-                printf("\nDigite o tipo de cliente: ");
+                printf("\nDigite o tipo de cliente(0-Idoso;1-Especial;2-Comum): ");
                 scanf("%d", &t);
                 enqueuePrio(&q, nome, t);   //função para inserir                
                 break;
@@ -49,7 +49,7 @@ int main()
                 
                 //mostrar o retirado da fila e desalocar o ponteiro usado para armazenar o nome
                 else{
-                    printf("\nPróximo a ser chamado:%s\n", cliente);
+                    printf("\nPróximo a ser chamado: %s\n", cliente);
                     free(cliente);
                 }
                 break;

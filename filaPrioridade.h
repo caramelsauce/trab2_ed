@@ -26,6 +26,6 @@ char *dequeuePrio(struct prioQueue *q);
 void printQueuePrio(struct prioQueue *q);
 
 //conta os clientes chamados e implementa a politica de "aging"
-void aging(struct prioQueue *q, int op);
+void aging(struct prioQueue *q);
 
 #endif

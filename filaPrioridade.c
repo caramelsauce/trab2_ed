@@ -38,11 +38,11 @@ void enqueuePrio(struct prioQueue *q, char *nome, int type)
 char *dequeuePrio(struct prioQueue *q)
 {
     if(!filaVazia(q->qIdoso)){
-        aging(q, 0);
+        aging(q);
         return (dequeue(q->qIdoso));
     }
     else if(filaVazia(q->qIdoso) && !filaVazia(q->qEspecial)){
-        aging(q, 1);
+        aging(q);
         return (dequeue(q->qEspecial));
     }
     else
@@ -59,27 +59,24 @@ void printQueuePrio(struct prioQueue *q)
     printQueue(q->qComum);
 }
 
-void aging(struct prioQueue *q, int op)
+void aging(struct prioQueue *q)
 {
-    static int contIdoso = 0, contEspecial = 0;
+    static int contEspecial = 0, contComum = 0;
     char *nome;
-    if(op == 0 && !filaVazia(q->qEspecial))
-        contIdoso++;
-    else if(op == 1 && !filaVazia(q->qComum))
+    if(!filaVazia(q->qIdoso) && !filaVazia(q->qEspecial))
         contEspecial++;
-    if(contIdoso == 5){
+    if(!filaVazia(q->qIdoso) && !filaVazia(q->qComum))
+        contComum++;
+    if(contEspecial == 5){
         nome = dequeue(q->qEspecial);
         if(nome != NULL)
             enqueue(q->qIdoso, nome);
-        nome = dequeue(q->qComum);
-        if(nome != NULL)
-            enqueue(q->qEspecial, nome);
-        contIdoso = 0;
-    }
-    if(contEspecial == 5){
-        nome = dequeue(q->qComum);
-        if(nome != NULL)
-            enqueue(q->qEspecial, nome);
         contEspecial = 0;
+    }
+    if(contComum == 5){
+        nome = dequeue(q->qComum);
+        if(nome != NULL)
+            enqueue(q->qEspecial, nome);
+        contComum = 0;
     }
 }
