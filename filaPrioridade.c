@@ -65,7 +65,7 @@ void aging(struct prioQueue *q)
     char *nome;
     if(!filaVazia(q->qIdoso) && !filaVazia(q->qEspecial))
         contEspecial++;
-    if(!filaVazia(q->qIdoso) && !filaVazia(q->qComum))
+    if((!filaVazia(q->qIdoso) || !filaVazia(q->qEspecial)) && !filaVazia(q->qComum))
         contComum++;
     if(contEspecial == 5){
         nome = dequeue(q->qEspecial);
